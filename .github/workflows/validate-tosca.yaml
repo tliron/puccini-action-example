@@ -1,0 +1,22 @@
+name: Puccini GitHub Action Example
+on: [ push ]
+
+jobs:
+
+  CompileTOSCA:
+    runs-on: ubuntu-latest
+    steps:
+
+    - name: Setup Puccini
+      uses: tliron/setup-puccini@v1
+      with:
+        version: main
+
+    - name: Puccini version
+      run: puccini-tosca version
+
+    - name: Check out repository code
+      uses: actions/checkout@v3
+
+    - name: Compile TOSCA
+      run: puccini-tosca compile --coerce ${{ github.workspace }}/data-types.yaml
